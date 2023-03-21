@@ -11,7 +11,7 @@ st.image(image)
 # Image = 
 reader = ea.Reader(['en'],gpu=False)
 img = cv2.imread(image)
-# img = cv2.imread('C:/Users/new/Desktop/p3/Creative Modern Business Card/5.png')
+# img = cv2.imread('C:/Users/new/Desktop/p3/Creative Modern Business Card/5.png')G
 results = reader.readtext(img,paragraph=True)      #decoder='wordbeamsearch'
 # results = reader.readtext(img,paragraph=True)
 data = []
@@ -19,38 +19,34 @@ j = 0
 for i in results:
     data.append(results[j][1])
     j += 1
-# data
-# org_reg = " ".join(data)        
-# print(org_reg)
 reg = " ".join(data)
 print(reg)
 
 
-email_regex = re.compile(r'''([a-zA-z0-9]+@[a-zA-z0-9]+\.[a-zA-Z]{2,10})''', re.VERBOSE)
+Email = re.compile(r'''([a-zA-z0-9]+@[a-zA-z0-9]+\.[a-zA-Z]{2,10})''', re.VERBOSE)
 email = ''
-for i in email_regex.findall(reg):
+for i in Email.findall(reg):
     email += i
     reg = reg.replace(i, '')
 print(f'EMAIL = {email}')
 
-phoneNumber_regex = re.compile(r'\+*\d{2,3}-\d{3,10}-\d{3,10}')
+phoneNumber = re.compile(r'\+*\d{2,3}-\d{3,10}-\d{3,10}')
 phone_no = ''
-for numbers in phoneNumber_regex.findall(reg):
+for numbers in phoneNumber.findall(reg):
     phone_no = phone_no + ' ' + numbers
-    # phone_no=phone_no.strip("+-")
     reg = reg.replace(numbers, '')
 print(f"Contactno = {phone_no}")
 
-address_regex = re.compile(r'\d{2,4}.+\d{6}')
+Address= re.compile(r'\d{2,4}.+\d{6}')
 address = ''
-for addr in address_regex.findall(reg):
+for addr in Address.findall(reg):
     address += addr
     reg = reg.replace(addr, '')
 print(f"Companyaddress = {address}")
 
-link_regex = re.compile(r'www.?.[\w.]+.', re.IGNORECASE)
+link1= re.compile(r'www.?.[\w.]+.', re.IGNORECASE)
 link = ''
-for lin in link_regex.findall(reg):
+for lin in link1.findall(reg):
     link += lin
 print(f"Weblink = {link}")
 reg = reg.replace(lin, '')
